@@ -62,7 +62,3 @@ public class Product {
             quantity -= qty;
     }
 }
-
-public class Cosmetic extends Product {
-    
-}

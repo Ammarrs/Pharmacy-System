@@ -8,6 +8,15 @@ package pharmacy_system;
  *
  * @author elkhedewy-group
  */
-public class Cosmetic {
+public class Cosmetic extends Product {
+    private String suitableForSkinType;
+
+    public Cosmetic(String suitableForSkinType, int productId, String name, double price, int quantity) {
+        super(productId, name, price, quantity);
+        this.suitableForSkinType = suitableForSkinType;
+    }
     
+     public boolean isSuitableFor(String skinType) {
+        return this.suitableForSkinType.equalsIgnoreCase(skinType);
+    }
 }
