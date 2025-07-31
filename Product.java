@@ -58,7 +58,11 @@ public class Product {
     }
     
     public void reduceQuantity(int qty){
-        if(isAvailable(qty))
+        if (isAvailable(qty)) {
             quantity -= qty;
+            System.out.println("[INFO]\n" + name + " quantity reduced by " + qty + ". Remaining: " + quantity);
+        } else {
+            System.out.println("[WARNING] Not enough stock for product: " + name);
+        }
     }
 }
