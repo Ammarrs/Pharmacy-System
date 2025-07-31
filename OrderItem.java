@@ -13,18 +13,14 @@ public class OrderItem {
     private int quantity;
     private double subtotal;
 
-    public OrderItem(Product product, int quantity, double subtotal) {
+    public OrderItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.subtotal = subtotal;
+        this.subtotal = calculateSubtotal();
     }
 
     public Product getProduct() {
         return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public int getQuantity() {
@@ -36,14 +32,11 @@ public class OrderItem {
     }
 
     public double getSubtotal() {
+        subtotal = product.getPrice()*quantity;
         return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
     }
     
     public double calculateSubtotal() {
-        return product.getPrice()*quantity;
+        return getSubtotal();
     }
 }
