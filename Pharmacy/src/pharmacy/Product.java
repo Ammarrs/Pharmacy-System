@@ -13,6 +13,11 @@ public class Product {
     protected String name;
     protected double price;
     protected int quantity;
+    
+    // added default constructor to make an easy to invoke wout args
+    public Product() {
+        
+    }
 
     public Product(int productId, String name, double price, int quantity) {
         this.productId = productId;
