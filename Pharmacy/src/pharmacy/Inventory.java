@@ -4,10 +4,15 @@
  */
 package pharmacy;
 
+import java.util.List;
+import java.util.ArrayList;
+import pharmacy.Product;
 /**
  *
  * @author ammar
  */
 public class Inventory {
+    private List<Product> products;
+    
     
 }
