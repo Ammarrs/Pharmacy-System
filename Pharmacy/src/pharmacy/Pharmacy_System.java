@@ -26,10 +26,9 @@ public class Pharmacy_System {
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
             int choice = input.nextInt();
-            input.nextLine(); // consume newline
+            input.nextLine(); 
 
             if (choice == 1) {
-                // Signup
                 System.out.print("Enter new username: ");
                 String newUser = input.nextLine();
 
@@ -39,7 +38,6 @@ public class Pharmacy_System {
                 Login.signup(newUser, newPass);
 
             } else if (choice == 2) {
-                // Login
                 System.out.print("Enter username: ");
                 String user = input.nextLine();
 
