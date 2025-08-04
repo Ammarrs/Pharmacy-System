@@ -4,6 +4,8 @@
  */
 package pharmacy;
 
+import java.util.Scanner;
+
 /**
  *
  * @author elkhedewy-group
@@ -15,6 +17,48 @@ public class Pharmacy_System {
      */
     public static void main(String[] args) {
         
+         Scanner input = new Scanner(System.in);
+        System.out.println("Welcome to the Pharmacy System!");
+
+        while (true) {
+            System.out.println("\n1. Signup");
+            System.out.println("2. Login");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = input.nextInt();
+            input.nextLine(); // consume newline
+
+            if (choice == 1) {
+                // Signup
+                System.out.print("Enter new username: ");
+                String newUser = input.nextLine();
+
+                System.out.print("Enter new password: ");
+                String newPass = input.nextLine();
+
+                Login.signup(newUser, newPass);
+
+            } else if (choice == 2) {
+                // Login
+                System.out.print("Enter username: ");
+                String user = input.nextLine();
+
+                System.out.print("Enter password: ");
+                String pass = input.nextLine();
+
+                Login login = new Login(user, pass);
+                login.login();
+
+            } else if (choice == 3) {
+                System.out.println("Exiting system... Goodbye!");
+                break;
+            } else {
+                System.out.println("Invalid choice. Try again.");
+            }
+        }
+
+        input.close();
+    
     }
     
 }
