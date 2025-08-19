@@ -15,4 +15,50 @@ public class Medicine extends Product {
         super(productId, name, price, quantity);
         this.prescriptionRequired = prescriptionRequired;
     }
+
+    public boolean isPrescriptionRequired() {
+        return prescriptionRequired;
+    }
+
+    public void setPrescriptionRequired(boolean prescriptionRequired) {
+        this.prescriptionRequired = prescriptionRequired;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Medicine{" + "prescriptionRequired=" + prescriptionRequired + '}';
+    }
+    
 }

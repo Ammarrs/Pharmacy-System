@@ -28,6 +28,11 @@ public class OrderItem {
         this.quantity = quantity;
         this.subtotal = calculateSubtotal();
     }
+
+    public static String getFILE_NAME() {
+        return FILE_NAME;
+    }
+    
     //SaveOrderItems
     public static void saveOrderItems(List<OrderItem> items) {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
