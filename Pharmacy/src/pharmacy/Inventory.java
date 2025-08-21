@@ -21,6 +21,14 @@ import pharmacy.Product;
 public class Inventory {
     private List<Product> products = new ArrayList<>();
     private static final String FILE_NAME = "inventory.txt";
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
     
     public Inventory() {
         loadFromFile();
@@ -87,38 +95,77 @@ public class Inventory {
     
     // for files
     
-    private void saveToFile() {
+    public void saveToFile() {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Product p: products) {
-                writer.write(p.getProductId() + "," + p.getName() + "," + p.getPrice() + "," + p.getQuantity());
+                String type = "Product";
+                String special = "";
+
+                if (p instanceof Medicine) {
+                    type = "Medicine";
+                    Medicine med = (Medicine) p;
+                    special = String.valueOf(med.isPrescriptionRequired());
+                } else if (p instanceof Cosmetic) {
+                    type = "Cosmetic";
+                    Cosmetic cos = (Cosmetic) p;
+                    special = cos.getSuitableForSkinType();
+                }
+
+                writer.write(p.getProductId() + "," + p.getName() + "," + p.getPrice() + "," + p.getQuantity() + "," + type + "," + special);
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("[ERR], Failedto save Inventory: " + e.getMessage());
+            System.out.println("[ERR], Failed to save Inventory: " + e.getMessage());
         }
     }
     
     private void loadFromFile() {
         File file = new File(FILE_NAME);
-        if(!file.exists()) {
+        if (!file.exists()) {
             return;
         }
-        
-        try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
-            line = reader.readLine();
-            while(line != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 4) {
-                    int id = Integer.parseInt(parts[0]);
-                    String name = parts[1];
-                    double price = Double.parseDouble(parts[2]);
-                    int quantity = Integer.parseInt(parts[3]);
-                    products.add(new Product(id, name, price, quantity));
+
+                if (parts.length >= 4) {
+                    try {
+                        int id = Integer.parseInt(parts[0].trim());
+                        String name = parts[1].trim();
+                        double price = Double.parseDouble(parts[2].trim());
+                        int quantity = Integer.parseInt(parts[3].trim());
+
+                        Product product;
+
+                        if (parts.length >= 6) {
+                            String type = parts[4].trim();
+                            String special = parts[5].trim();
+
+                            if ("Medicine".equals(type)) {
+                                boolean prescriptionRequired = Boolean.parseBoolean(special);
+                                product = new Medicine(prescriptionRequired, id, name, price, quantity);
+                            } else if ("Cosmetic".equals(type)) {
+                                product = new Cosmetic(special, id, name, price, quantity);
+                            } else {
+                                product = new Product(id, name, price, quantity);
+                            }
+                        } else {
+                            product = new Product(id, name, price, quantity);
+                        }
+
+                        products.add(product);
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("[WARN] Skipping invalid line: " + line);
+                    }
+                } else {
+                    System.out.println("[WARN] Invalid data format: " + line);
                 }
             }
-        } catch (IOException e){
-            System.out.println("[ERR], Failed to load Inventory " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("[ERR] Failed to load Inventory: " + e.getMessage());
         }
     }
 }

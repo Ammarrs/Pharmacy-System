@@ -81,7 +81,8 @@ public class Receipt {
         System.out.println("Date: " + date);
 
         if (order != null && order.getCustomer() != null) {
-            System.out.println("Customer: " + order.getCustomer().getCustomerInfo());
+            System.out.println("Customer: " + order.getCustomer());
+            order.getCustomer().getCustomerinfo();
         }
 
         System.out.println("\nItems:");

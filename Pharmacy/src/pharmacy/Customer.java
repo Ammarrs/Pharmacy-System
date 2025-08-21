@@ -8,11 +8,15 @@ package pharmacy;
  *
  * @author HP
  */
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class Customer {
     private static int lastId = 0;
-
     private int customerid;
     private String name;
     private String phone;
@@ -23,6 +27,37 @@ public class Customer {
         this.phone = phone;
     }
 
+    // ===================== Load Customers =====================
+    public static List<Customer> loadCustomersFromFile(String fileName) {
+        List<Customer> customers = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            int maxId = 0;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 3) {
+                    int id = Integer.parseInt(parts[0]);
+                    String name = parts[1];
+                    String phone = parts[2];
+
+                    // نعمل كائن جديد من Customer بس نحافظ على نفس ID
+                    Customer c = new Customer(name, phone);
+                    c.customerid = id;  
+                    customers.add(c);
+
+                    if (id > maxId) {
+                        maxId = id;
+                    }
+                }
+            }
+            lastId = maxId; // تحديث آخر ID
+        } catch (IOException e) {
+            System.out.println("No existing customer file. Starting fresh.");
+        }
+        return customers;
+    }
+
+    // ===================== باقي الكود زي ما عندك =====================
     public static void initializeLastId(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -66,4 +101,10 @@ public class Customer {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "customerid=" + customerid + ", name=" + name + ", phone=" + phone + '}';
+    }
+    
 }

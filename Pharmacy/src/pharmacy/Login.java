@@ -1,4 +1,3 @@
-
 package pharmacy;
 
 import java.io.*;
@@ -21,33 +20,35 @@ public class Login {
         this.password = password;
     }
 
-    public static boolean signup(String username, String password) {
-        if (Pharmacists.containsKey(username)) {
-            System.out.println("Username already exists.");
+    // ✅ validate function
+    public boolean validate() {
+        if (username == null || username.trim().isEmpty()) {
+            System.out.println("Username cannot be empty.");
             return false;
         }
-
-        Pharmacists.put(username, password);
-        System.out.println("Signup successful!");
-
-        // Save to file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            writer.write(username + "," + password);
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Error saving to file: " + e.getMessage());
+        if (password == null || password.trim().isEmpty()) {
+            System.out.println("Password cannot be empty.");
+            return false;
         }
-
+        if (!Pharmacists.containsKey(username)) {
+            System.out.println("Username not found.");
+            return false;
+        }
+        if (!Pharmacists.get(username).equals(password)) {
+            System.out.println("Incorrect password.");
+            return false;
+        }
         return true;
     }
 
+    // ✅ login function uses validate()
     public boolean login() {
-        if (Pharmacists.containsKey(username) && Pharmacists.get(username).equals(password)) {
+        if (validate()) {
             isLoggedin = true;
             System.out.println("You have successfully logged in.");
             return true;
         } else {
-            System.out.println("Invalid username or password.");
+            System.out.println("Login failed.");
             return false;
         }
     }

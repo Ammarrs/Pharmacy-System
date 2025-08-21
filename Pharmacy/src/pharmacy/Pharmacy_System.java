@@ -17,45 +17,34 @@ public class Pharmacy_System {
      */
     public static void main(String[] args) {
 
-//         Scanner input = new Scanner(System.in);
-//        System.out.println("Welcome to the Pharmacy System!");
-//
-//        while (true) {
-//            System.out.println("\n1. Signup");
-//            System.out.println("2. Login");
-//            System.out.println("3. Exit");
-//            System.out.print("Enter your choice: ");
-//            int choice = input.nextInt();
-//            input.nextLine(); 
-//
-//            if (choice == 1) {
-//                System.out.print("Enter new username: ");
-//                String newUser = input.nextLine();
-//
-//                System.out.print("Enter new password: ");
-//                String newPass = input.nextLine();
-//
-//                Login.signup(newUser, newPass);
-//
-//            } else if (choice == 2) {
-//                System.out.print("Enter username: ");
-//                String user = input.nextLine();
-//
-//                System.out.print("Enter password: ");
-//                String pass = input.nextLine();
-//
-//                Login login = new Login(user, pass);
-//                login.login();
-//
-//            } else if (choice == 3) {
-//                System.out.println("Exiting system... Goodbye!");
-//                break;
-//            } else {
-//                System.out.println("Invalid choice. Try again.");
-//            }
-//        }
-//
-//        input.close();
+ Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Pharmacy Login System ===");
+
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+
+        // إنشاء Object من Login
+        Login login = new Login(username, password);
+
+        // محاولة تسجيل الدخول
+        if (login.login()) {
+            System.out.println("Welcome, " + login.getUsername() + "!");
+
+            // جرب logout
+            System.out.print("Do you want to logout? (y/n): ");
+            String choice = scanner.nextLine();
+            if (choice.equalsIgnoreCase("y")) {
+                login.logout();
+            }
+        } else {
+            System.out.println("Access denied.");
+        }
+
+        scanner.close();
 //        Customer customer = new Customer("Farida", "01012345678");
 //        Customer customer2 = new Customer("Haneen", "01012345678");
 //        Customer customer3 = new Customer("Ahmed", "01012345678");

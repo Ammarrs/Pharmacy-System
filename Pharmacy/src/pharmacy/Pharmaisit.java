@@ -47,7 +47,7 @@ public class Pharmaisit
             
             if(newStock >= 0)
             {
-                inventory.updateQuantity(product.getProductId(), newStock);
+                inventory.updateQuantity(product, newStock);
                 double subtotal = item.calculateSubtotal();
                 total += subtotal;
                 System.out.println("Sold: " + product.getName() +
