@@ -1,4 +1,9 @@
-1,Panadol,15.5,100
-2,Insulin,120.0,25
-3,Face Cream,45.0,30
-4,Aspirin,12.0,75
+1,Panadol,15.5,100,Product,
+2,Insulin,120.0,24,Product,
+3,Face Cream,45.0,30,Product,
+4,Aspirin,12.0,75,Product,
+5,test,15.0,20,Product,
+6,test2,120.0,0,Product,
+7,test3,30.0,5,Product,
+8,test4,5.0,10,Cosmetic,dry
+9,test5,50.0,10,Medicine,false

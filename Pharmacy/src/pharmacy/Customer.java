@@ -101,4 +101,10 @@ public class Customer {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "customerid=" + customerid + ", name=" + name + ", phone=" + phone + '}';
+    }
+    
 }
