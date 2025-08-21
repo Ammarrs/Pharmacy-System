@@ -2,6 +2,7 @@ package pharmacy;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ public class Order {
     static {
         loadOrderCounter();
     }
+
     
     public Order(Customer customer) {
         this.orderId = ++orderCounter;
@@ -34,6 +36,7 @@ public class Order {
         this.totalAmount = 0.0;
     }
     
+
     // Constructor for loading from file
     public Order(int orderId, Customer customer, Date orderDate, String status, double totalAmount) {
         this.orderId = orderId;
@@ -83,6 +86,7 @@ public class Order {
     
     public void completeOrder() {
         this.status = "Completed";
+
         saveOrderToFile();
         saveOrderItemsToFile();
     }
@@ -220,6 +224,7 @@ public class Order {
             System.out.println("No existing orders file. Starting from Order ID = 1");
             orderCounter = 0;
         }
+
     }
     
     // Getters and Setters
@@ -231,9 +236,11 @@ public class Order {
     public String getStatus() { return status; }
     
     public void setStatus(String status) { this.status = status; }
+
     
     @Override
     public String toString() {
         return "Order #" + orderId + " - " + customer.getName() + " - $" + String.format("%.2f", totalAmount);
     }
 }
+

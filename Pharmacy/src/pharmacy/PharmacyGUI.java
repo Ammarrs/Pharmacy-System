@@ -1,3 +1,4 @@
+
 package pharmacy;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 /**
  * Enhanced Pharmacy Management System GUI with File Operations and Dynamic Dashboard
@@ -30,6 +32,7 @@ public class PharmacyGUI extends JFrame {
     private JTextField usernameField, passwordField;
     private JButton loginButton, logoutButton;
     
+
     // Dashboard Components - Added for dynamic refresh
     private JLabel totalProductsLabel, totalCustomersLabel, ordersTodayLabel, lowStockLabel;
     
@@ -80,6 +83,7 @@ public class PharmacyGUI extends JFrame {
             customers.add(new Customer("Farida", "01012345678"));
             customers.add(new Customer("Haneen", "01012345679"));
             customers.add(new Customer("Ahmed", "01012345680"));
+
             // Save sample customers to file
             for (Customer c : customers) {
                 c.saveToFile("customers.txt");
