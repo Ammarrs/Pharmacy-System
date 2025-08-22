@@ -1,2 +1,9 @@
+# Pharmacy Management System Users
+# Format: username=password
+
+morning_user=morning123
+admin=admin123
+evening_user=evening123
+
 Ammar,123456
 Farida,123456

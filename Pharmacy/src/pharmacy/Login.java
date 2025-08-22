@@ -10,7 +10,6 @@ public class Login {
     private static final HashMap<String, String> Pharmacists = new HashMap<>();
     private static final String FILE_NAME = "users.txt";
 
-    // Load users from file once at the beginning
     static {
         loadUsersFromFile();
     }
@@ -20,7 +19,6 @@ public class Login {
         this.password = password;
     }
 
-    // ✅ validate function
     public boolean validate() {
         if (username == null || username.trim().isEmpty()) {
             System.out.println("Username cannot be empty.");
@@ -41,7 +39,6 @@ public class Login {
         return true;
     }
 
-    // ✅ login function uses validate()
     public boolean login() {
         if (validate()) {
             isLoggedin = true;

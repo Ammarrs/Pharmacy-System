@@ -166,5 +166,14 @@ public class Inventory {
     } catch (IOException e) {
         System.out.println("[ERR] Failed to load Inventory: " + e.getMessage());
     }
+    public boolean removeProduct(int productId) {
+    for (int i = 0; i < products.size(); i++) {
+        if (products.get(i).getProductId() == productId) {
+            products.remove(i);
+            return true;
+        }
+    }
+    return false;
+}
 }
 }
