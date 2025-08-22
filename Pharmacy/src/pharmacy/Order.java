@@ -20,30 +20,35 @@ public class Order {
     private String status;
     private static final String ORDERS_FILE = "orders.txt";
     private static final String ORDER_ITEMS_FILE = "order_details.txt";
+    private String soldBy;
     
     static {
         loadOrderCounter();
     }
     
-    public Order(Customer customer) {
+    public Order(Customer customer, String soldBy) {
         this.orderId = ++orderCounter;
         this.customer = customer;
         this.items = new ArrayList<>();
         this.orderDate = new Date();
         this.status = "Pending";
         this.totalAmount = 0.0;
+        this.soldBy = soldBy;
     }
     
     // Constructor for loading from file
-    public Order(int orderId, Customer customer, Date orderDate, String status, double totalAmount) {
+    public Order(int orderId, Customer customer, Date orderDate, String status, double totalAmount, String soldBy) {
         this.orderId = orderId;
         this.customer = customer;
         this.orderDate = orderDate;
         this.status = status;
         this.totalAmount = totalAmount;
+        this.soldBy = soldBy;
         this.items = new ArrayList<>();
         if (orderId > orderCounter) orderCounter = orderId;
     }
+    
+    public String getSoldBy() { return soldBy; }
     
     public void addItem(Product product, int quantity) {
         if (product.isAvailable(quantity)) {
@@ -92,11 +97,12 @@ public class Order {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ORDERS_FILE, true))) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             writer.write(orderId + "," + 
-                        customer.getCustomerid() + "," + 
-                        customer.getName() + "," + 
-                        dateFormat.format(orderDate) + "," + 
-                        status + "," + 
-                        String.format("%.2f", totalAmount));
+                customer.getCustomerid() + "," + 
+                customer.getName() + "," + 
+                dateFormat.format(orderDate) + "," + 
+                status + "," + 
+                String.format("%.2f", totalAmount) + "," +
+                (soldBy != null ? soldBy : "Unknown"));
             writer.newLine();
             System.out.println("✅ Order " + orderId + " saved to file successfully.");
         } catch (IOException e) {
@@ -131,13 +137,14 @@ public class Order {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 6) {
+                if (parts.length >= 6) {
                     int orderId = Integer.parseInt(parts[0]);
                     int customerId = Integer.parseInt(parts[1]);
                     String customerName = parts[2];
                     Date orderDate = dateFormat.parse(parts[3]);
                     String status = parts[4];
                     double totalAmount = Double.parseDouble(parts[5]);
+                    String soldBy = parts.length > 6 ? parts[6] : "Unknown";
                     
                     // Find customer
                     Customer customer = null;
@@ -153,7 +160,7 @@ public class Order {
                         customer = new Customer( customerName, "Unknown");
                     }
                     
-                    Order order = new Order(orderId, customer, orderDate, status, totalAmount);
+                    Order order = new Order(orderId, customer, orderDate, status, totalAmount, soldBy);
                     orders.add(order);
                 }
             }
