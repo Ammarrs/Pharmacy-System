@@ -1,3 +1,4 @@
+
 package pharmacy;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+
 
 /**
  * Enhanced Pharmacy Management System GUI with Morning/Evening Shift Management
@@ -61,6 +63,7 @@ public class PharmacyGUI extends JFrame {
     private static final String SHIFT_STATE_FILE = "current_shift.txt";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
+
     // Dashboard Components - Added for dynamic refresh
     private JLabel totalProductsLabel, totalCustomersLabel, ordersTodayLabel, lowStockLabel;
     
@@ -322,6 +325,7 @@ public class PharmacyGUI extends JFrame {
             customers.add(new Customer("Farida", "01012345678"));
             customers.add(new Customer("Haneen", "01012345679"));
             customers.add(new Customer("Ahmed", "01012345680"));
+
             // Save sample customers to file
             for (Customer c : customers) {
                 c.saveToFile("customers.txt");

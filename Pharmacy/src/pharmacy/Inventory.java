@@ -118,7 +118,6 @@ public class Inventory {
             System.out.println("[ERR], Failed to save Inventory: " + e.getMessage());
         }
     }
-    
     private void loadFromFile() {
         File file = new File(FILE_NAME);
         if (!file.exists()) {
@@ -162,11 +161,10 @@ public class Inventory {
                     }
                 } else {
                     System.out.println("[WARN] Invalid data format: " + line);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("[ERR] Failed to load Inventory: " + e.getMessage());
+
         }
+    } catch (IOException e) {
+        System.out.println("[ERR] Failed to load Inventory: " + e.getMessage());
     }
     public boolean removeProduct(int productId) {
     for (int i = 0; i < products.size(); i++) {
@@ -176,5 +174,6 @@ public class Inventory {
         }
     }
     return false;
+}
 }
 }
