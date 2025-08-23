@@ -67,7 +67,6 @@ public class Receipt {
     }
     
     void generate () {
-        // Make changes
         if (order != null) {
             this.items = new ArrayList<>(order.getItems());
             this.totalPrice = order.calculateTotal();
@@ -75,7 +74,6 @@ public class Receipt {
     }
     
     void printReceipt () {
-        // Make changes
         System.out.println("===== RECEIPT =====");
         System.out.println("Receipt ID: " + id);
         System.out.println("Date: " + date);

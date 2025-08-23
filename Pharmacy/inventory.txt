@@ -1,5 +1,7 @@
-1,Panadol,15.5,95,Product,
-2,Insulin,120.0,20,Product,
-3,Face Cream,45.0,28,Product,
-4,Aspirin,12.0,62,Product,
-10,Shampoo,200.0,30,Cosmetic,dry
+1,Vitamin C Tablets,150.0,50,Medicine,false
+2,Face Cream,200.0,100,Cosmetic,dry
+3,Paracetamol 500mg,50.0,30,Medicine,true
+4,Sunscreen SPF50,400.0,30,Cosmetic,oily
+5,Shampoo,162.0,20,Cosmetic,oily hair
+6,Calcium Tablets,234.0,10,Medicine,false
+7,Lip Balm,50.0,22,Cosmetic,dry lips

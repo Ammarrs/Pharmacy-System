@@ -33,7 +33,6 @@ public class OrderItem {
         return FILE_NAME;
     }
     
-    //SaveOrderItems
     public static void saveOrderItems(List<OrderItem> items) {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
         for (OrderItem item : items) {
@@ -72,7 +71,6 @@ public class OrderItem {
         return getSubtotal();
     }
     
-    //LoadOrderItems
     public static List<OrderItem> loadOrderItems() {
         List<OrderItem> items = new ArrayList<>();
         File file = new File(FILE_NAME);

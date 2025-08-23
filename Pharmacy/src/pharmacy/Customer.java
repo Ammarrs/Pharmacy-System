@@ -6,7 +6,7 @@ package pharmacy;
 
 /**
  *
- * @author HP
+ * @author Farida
  */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,18 +16,18 @@ import java.io.IOException;
 import java.util.*;
 
 public class Customer {
+
     private static int lastId = 0;
     private int customerid;
     private String name;
     private String phone;
 
     public Customer(String name, String phone) {
-        this.customerid = ++lastId; // توليد ID تلقائي
+        this.customerid = ++lastId;
         this.name = name;
         this.phone = phone;
     }
 
-    // ===================== Load Customers =====================
     public static List<Customer> loadCustomersFromFile(String fileName) {
         List<Customer> customers = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -40,9 +40,8 @@ public class Customer {
                     String name = parts[1];
                     String phone = parts[2];
 
-                    // نعمل كائن جديد من Customer بس نحافظ على نفس ID
                     Customer c = new Customer(name, phone);
-                    c.customerid = id;  
+                    c.customerid = id;
                     customers.add(c);
 
                     if (id > maxId) {
@@ -50,14 +49,13 @@ public class Customer {
                     }
                 }
             }
-            lastId = maxId; // تحديث آخر ID
+            lastId = maxId;
         } catch (IOException e) {
             System.out.println("No existing customer file. Starting fresh.");
         }
         return customers;
     }
 
-    // ===================== باقي الكود زي ما عندك =====================
     public static void initializeLastId(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -71,7 +69,7 @@ public class Customer {
                     }
                 }
             }
-            lastId = maxId; // تخزين آخر ID
+            lastId = maxId;
         } catch (IOException e) {
             System.out.println("No existing customer file. Starting from ID = 1");
         }
@@ -89,7 +87,7 @@ public class Customer {
         return phone;
     }
 
-    public void getCustomerinfo () {
+    public void getCustomerinfo() {
         System.out.println("Customer Id: " + customerid + ", Name: " + name + ", Phone: " + phone);
     }
 
@@ -104,7 +102,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerid=" + customerid + ", name=" + name + ", phone=" + phone + '}';
+        return name + " - " + phone;
     }
-    
+
 }

@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Enhanced Order class with file operations
- * @author PharmacySystem
+ * 
+ * @author Farida
  */
 public class Order {
     private static int orderCounter = 0;
@@ -36,7 +36,6 @@ public class Order {
         this.soldBy = soldBy;
     }
     
-    // Constructor for loading from file
     public Order(int orderId, Customer customer, Date orderDate, String status, double totalAmount, String soldBy) {
         this.orderId = orderId;
         this.customer = customer;
@@ -92,7 +91,6 @@ public class Order {
         saveOrderItemsToFile();
     }
     
-    // Save order header to file
     public void saveOrderToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ORDERS_FILE, true))) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -110,7 +108,6 @@ public class Order {
         }
     }
     
-    // Save order items to file
     public void saveOrderItemsToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ORDER_ITEMS_FILE, true))) {
             for (OrderItem item : items) {
@@ -128,7 +125,6 @@ public class Order {
         }
     }
     
-    // Load all orders from file
     public static List<Order> loadOrdersFromFile(List<Customer> customers) {
         List<Order> orders = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -146,7 +142,6 @@ public class Order {
                     double totalAmount = Double.parseDouble(parts[5]);
                     String soldBy = parts.length > 6 ? parts[6] : "Unknown";
                     
-                    // Find customer
                     Customer customer = null;
                     for (Customer c : customers) {
                         if (c.getCustomerid() == customerId) {
@@ -156,7 +151,6 @@ public class Order {
                     }
                     
                     if (customer == null) {
-                        // Create customer if not found (backup)
                         customer = new Customer( customerName, "Unknown");
                     }
                     
@@ -171,7 +165,6 @@ public class Order {
         return orders;
     }
     
-    // Load order items for a specific order
     public void loadOrderItems(List<Product> allProducts) {
         try (BufferedReader reader = new BufferedReader(new FileReader(ORDER_ITEMS_FILE))) {
             String line;
@@ -185,7 +178,6 @@ public class Order {
                         int quantity = Integer.parseInt(parts[3]);
                         double price = Double.parseDouble(parts[4]);
                         
-                        // Find product in inventory or create temporary one
                         Product product = null;
                         for (Product p : allProducts) {
                             if (p.getProductId() == productId) {
@@ -195,7 +187,6 @@ public class Order {
                         }
                         
                         if (product == null) {
-                            // Create temporary product for historical data
                             product = new Product(productId, productName, price, 0);
                         }
                         
@@ -208,7 +199,6 @@ public class Order {
         }
     }
     
-    // Load and set the order counter from existing files
     private static void loadOrderCounter() {
         try (BufferedReader reader = new BufferedReader(new FileReader(ORDERS_FILE))) {
             String line;
@@ -229,7 +219,6 @@ public class Order {
         }
     }
     
-    // Getters and Setters
     public int getOrderId() { return orderId; }
     public Customer getCustomer() { return customer; }
     public List<OrderItem> getItems() { return items; }

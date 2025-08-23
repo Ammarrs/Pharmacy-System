@@ -34,7 +34,6 @@ public class Product {
         this.quantity = quantity;
     }
     
-    //SaveProducts
      public static void saveProducts(List<Product> products) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Product p : products) {
